@@ -19,7 +19,7 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults()) // CORS 활성화 (핵심!)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/member/login", "/member/join", "/member/register").permitAll()
+                        .requestMatchers("/member/login", "/member/join", "/member/register", "/ws/**").permitAll()
                         .anyRequest().authenticated()
                 ).logout(AbstractHttpConfigurer::disable);
         return http.build();

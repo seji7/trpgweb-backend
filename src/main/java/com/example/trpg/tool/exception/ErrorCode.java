@@ -11,7 +11,10 @@ public enum ErrorCode {
     UNAUTHORIZED(HttpStatus.FORBIDDEN, "권한이 없습니다."),
     ALREADY_JOINED(HttpStatus.CONFLICT, "이미 등록된 플레이어입니다."),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류가 발생했습니다.");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류가 발생했습니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND,"해당 회원이 존재하지 않습니다."),
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "현재 비밀번호가 올바르지 않습니다."),
+    USERID_DUPLICATED(HttpStatus.CONFLICT, "이미 사용 중인 아이디입니다.");
 
 
     private final HttpStatus status;

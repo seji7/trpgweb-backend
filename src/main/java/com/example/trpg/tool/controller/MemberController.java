@@ -6,6 +6,7 @@ import com.example.trpg.tool.dto.MemberUpdateRequest;
 import com.example.trpg.tool.entity.Member;
 import com.example.trpg.tool.security.CustomUserDetails;
 import com.example.trpg.tool.security.dto.MemberInfoDTO;
+import com.example.trpg.tool.security.dto.PasswordUpdateRequest;
 import com.example.trpg.tool.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -79,6 +80,14 @@ public class MemberController {
 
         Member loginMember = userDetails.getMember();
         memberService.updateMember(loginMember.getMid(), dto);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update-password")
+    public ResponseEntity<?> updatePassword(@RequestBody PasswordUpdateRequest dto,
+                                            @AuthenticationPrincipal CustomUserDetails userDetails) {
+        Member member = userDetails.getMember();
+        memberService.updatePassword(member.getMid(), dto);
         return ResponseEntity.ok().build();
     }
 }

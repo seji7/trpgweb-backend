@@ -2,9 +2,11 @@ package com.example.trpg.tool.controller;
 
 import com.example.trpg.tool.dto.LoginRequestDTO;
 import com.example.trpg.tool.dto.MemberRegisterRequestDTO;
+import com.example.trpg.tool.dto.MemberUpdateRequest;
+import com.example.trpg.tool.entity.Member;
 import com.example.trpg.tool.security.CustomUserDetails;
 import com.example.trpg.tool.security.dto.MemberInfoDTO;
-import com.example.trpg.tool.service.MemberServiceImpl;
+import com.example.trpg.tool.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.HttpStatus;
@@ -23,7 +25,7 @@ import jakarta.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
-    private final MemberServiceImpl memberService;
+    private final MemberService memberService;
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/join")
@@ -64,5 +66,19 @@ public class MemberController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패: " + e.getMessage());
         }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> update(
+            @RequestBody MemberUpdateRequest dto,
+            @AuthenticationPrincipal CustomUserDetails userDetails
+    ) {
+        if (userDetails == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        Member loginMember = userDetails.getMember();
+        memberService.updateMember(loginMember.getMid(), dto);
+        return ResponseEntity.ok().build();
     }
 }

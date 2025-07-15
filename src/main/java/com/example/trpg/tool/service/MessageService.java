@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface MessageService {
     void saveMessage(Message message);
-
     List<MessageShowDTO> getMessagesByRoomId(Long roomId);
 }

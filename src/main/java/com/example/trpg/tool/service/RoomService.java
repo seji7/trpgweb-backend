@@ -3,6 +3,7 @@ package com.example.trpg.tool.service;
 import com.example.trpg.tool.dto.AddPlayerRequestDTO;
 import com.example.trpg.tool.dto.RoomRegisterRequestDTO;
 import com.example.trpg.tool.dto.RoomResponseDTO;
+import com.example.trpg.tool.entity.Room;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface RoomService {
     void deleteRoom(Long rno, Long ownerMid);
 
     public List<RoomResponseDTO> getAllRooms();
+
+    Room getRoomEntity(Long rno);
 }

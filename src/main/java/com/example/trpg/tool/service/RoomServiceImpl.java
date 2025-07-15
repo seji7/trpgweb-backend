@@ -141,4 +141,10 @@ public class RoomServiceImpl implements RoomService {
 
         roomRepository.delete(room);
     }
+
+    @Override
+    public Room getRoomEntity(Long rno) {
+        return roomRepository.findById(rno)
+                .orElseThrow(() -> new CustomException(ErrorCode.ROOM_NOT_FOUND));
+    }
 }

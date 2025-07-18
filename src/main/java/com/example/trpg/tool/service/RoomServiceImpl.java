@@ -1,8 +1,8 @@
 package com.example.trpg.tool.service;
 
-import com.example.trpg.tool.dto.AddPlayerRequestDTO;
-import com.example.trpg.tool.dto.RoomRegisterRequestDTO;
-import com.example.trpg.tool.dto.RoomResponseDTO;
+import com.example.trpg.tool.dto.room.AddPlayerRequestDTO;
+import com.example.trpg.tool.dto.room.RoomRegisterRequestDTO;
+import com.example.trpg.tool.dto.room.RoomResponseDTO;
 import com.example.trpg.tool.entity.Member;
 import com.example.trpg.tool.entity.Room;
 import com.example.trpg.tool.entity.RoomPlayer;

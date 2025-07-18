@@ -1,4 +1,4 @@
-package com.example.trpg.tool.security;
+package com.example.trpg.tool.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.example.trpg.tool.dto;
+package com.example.trpg.tool.dto.room;
 
 import com.example.trpg.tool.entity.Room;
 import lombok.Builder;

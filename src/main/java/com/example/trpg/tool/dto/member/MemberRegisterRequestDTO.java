@@ -1,4 +1,4 @@
-package com.example.trpg.tool.dto;
+package com.example.trpg.tool.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;

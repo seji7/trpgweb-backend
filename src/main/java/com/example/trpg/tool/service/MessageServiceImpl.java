@@ -1,6 +1,6 @@
 package com.example.trpg.tool.service.impl;
 
-import com.example.trpg.tool.dto.MessageShowDTO;
+import com.example.trpg.tool.dto.message.MessageShowDTO;
 import com.example.trpg.tool.entity.Message;
 import com.example.trpg.tool.repository.MessageRepository;
 import com.example.trpg.tool.service.MessageService;

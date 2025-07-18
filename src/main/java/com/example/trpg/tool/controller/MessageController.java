@@ -1,6 +1,7 @@
 package com.example.trpg.tool.controller;
 
-import com.example.trpg.tool.dto.MessageShowDTO;
+import com.example.trpg.tool.dto.common.ApiResponse;
+import com.example.trpg.tool.dto.message.MessageShowDTO;
 import com.example.trpg.tool.entity.Message;
 import com.example.trpg.tool.entity.Member;
 import com.example.trpg.tool.entity.Room;
@@ -36,12 +37,12 @@ public class MessageController {
                 .build();
 
         messageService.saveMessage(message);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new ApiResponse<>(true, "메시지 전송 완료", null));
     }
 
     @GetMapping("/{roomId}")
-    public ResponseEntity<List<MessageShowDTO>> getMessages(@PathVariable Long roomId) {
+    public ResponseEntity<ApiResponse<List<MessageShowDTO>>> getMessages(@PathVariable Long roomId) {
         List<MessageShowDTO> messages = messageService.getMessagesByRoomId(roomId);
-        return ResponseEntity.ok(messages);
+        return ResponseEntity.ok(new ApiResponse<>(true, "메시지 목록 조회 성공", messages));
     }
 }

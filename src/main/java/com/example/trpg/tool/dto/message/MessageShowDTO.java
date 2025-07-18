@@ -1,4 +1,4 @@
-package com.example.trpg.tool.dto;
+package com.example.trpg.tool.dto.message;
 
 import lombok.Getter;
 

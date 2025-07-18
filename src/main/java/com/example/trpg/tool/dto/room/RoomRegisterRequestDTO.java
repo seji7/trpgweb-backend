@@ -1,6 +1,5 @@
-package com.example.trpg.tool.dto;
+package com.example.trpg.tool.dto.room;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

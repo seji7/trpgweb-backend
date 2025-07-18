@@ -1,4 +1,4 @@
-package com.example.trpg.tool.dto;
+package com.example.trpg.tool.dto.member;
 
 import com.example.trpg.tool.entity.Member;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.example.trpg.tool.service;
 
-import com.example.trpg.tool.dto.MemberRegisterRequestDTO;
-import com.example.trpg.tool.dto.MemberUpdateRequest;
+import com.example.trpg.tool.dto.member.MemberRegisterRequestDTO;
+import com.example.trpg.tool.dto.member.MemberUpdateRequest;
 import com.example.trpg.tool.entity.Member;
 import com.example.trpg.tool.exception.CustomException;
 import com.example.trpg.tool.repository.MemberRepository;
@@ -64,5 +64,11 @@ public class MemberServiceImpl implements MemberService {
 
         member.setPassword(passwordEncoder.encode(dto.getNewPassword()));
         memberRepository.save(member);
+    }
+
+    @Override
+    public Member findByUserId(String username) {
+        return memberRepository.findByUserId(username)
+                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
     }
 }

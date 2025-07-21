@@ -101,7 +101,7 @@ public class JwtUtil {
 
     /** ✅ 쿠키에서 Refresh Token 추출 */
     public String resolveRefreshTokenFromCookie(HttpServletRequest request) {
-        log.info("Refresh token making start");
+//        log.info("Refresh token making start");
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("refreshToken".equals(cookie.getName())) {

@@ -9,6 +9,7 @@ import com.example.trpg.tool.entity.RoomPlayer;
 import com.example.trpg.tool.exception.CustomException;
 import com.example.trpg.tool.exception.ErrorCode;
 import com.example.trpg.tool.repository.MemberRepository;
+import com.example.trpg.tool.repository.MessageRepository;
 import com.example.trpg.tool.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,6 +35,7 @@ public class RoomServiceImpl implements RoomService {
 
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
+    private final MessageRepository messageRepository;
 
     public RoomResponseDTO createRoom(RoomRegisterRequestDTO dto, Long ownerMid) {
         String fileName = null;
@@ -43,11 +45,11 @@ public class RoomServiceImpl implements RoomService {
                 String uuid = UUID.randomUUID().toString();
                 fileName = uuid + "_" + dto.getThumbnail().getOriginalFilename();
 
-                String uploadDir = System.getProperty("user.dir") + File.separator + "upload-dir";
+                String uploadDir = "C:/trpg/list_thumnail";
                 Path savePath = Paths.get(uploadDir, fileName);
 
-                Files.createDirectories(savePath.getParent());
-                dto.getThumbnail().transferTo(savePath.toFile());
+                Files.createDirectories(savePath.getParent()); // 폴더 없으면 생성
+                dto.getThumbnail().transferTo(savePath.toFile()); // 저장
             }
         } catch (IOException | IllegalStateException e) {
             log.error("썸네일 파일 업로드 실패", e);
@@ -131,14 +133,17 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     @Transactional
-    public void deleteRoom(Long rno, Long requesterMid) {
+    public void deleteRoom(Long rno, Long requesterMid, String requesterRole) {
         Room room = roomRepository.findById(rno)
                 .orElseThrow(() -> new CustomException(ErrorCode.ROOM_NOT_FOUND));
 
-        if (!room.getOwner().getMid().equals(requesterMid)) {
+        boolean isOwner = room.getOwner().getMid().equals(requesterMid);
+        boolean isAdmin = "ADMIN".equalsIgnoreCase(requesterRole); // 대소문자 방지
+
+        if (!isOwner && !isAdmin) {
             throw new CustomException(ErrorCode.UNAUTHORIZED);
         }
-
+        messageRepository.deleteAllByRoomRno(rno);
         roomRepository.delete(room);
     }
 

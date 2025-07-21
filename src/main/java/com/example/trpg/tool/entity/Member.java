@@ -48,5 +48,8 @@ public class Member {
     @Enumerated(EnumType.ORDINAL) // int로 저장 (0:NORMAL, 1:SPECIAL, 2:VIP)
     @Column(name = "premium_level", nullable = false)
     private AccountLevel accountLevel = AccountLevel.NORMAL;
-}
 
+    public enum UserRole {
+        ROLE_USER, ROLE_ADMIN;
+    }
+}

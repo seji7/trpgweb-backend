@@ -68,7 +68,9 @@ public class RoomController {
             @AuthenticationPrincipal CustomUserDetails userDetails
     ) {
         Long memberMid = userDetails.getMember().getMid();
-        roomService.deleteRoom(rno, memberMid);
+        String role = userDetails.getMember().getUserRole();
+
+        roomService.deleteRoom(rno, memberMid, role);
         return ResponseEntity.ok(new ApiResponse<>(true, "방 삭제 완료", null));
     }
 }

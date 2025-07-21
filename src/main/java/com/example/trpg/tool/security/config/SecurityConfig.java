@@ -25,10 +25,20 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/member/login", "/member/join", "/member/register", "/ws/**", "/member/me").permitAll()
+                        .requestMatchers(
+                                "/member/login",
+                                "/member/join",
+                                "/member/register",
+                                "/member/me",
+                                "/ws/**",
+                                "/uploads/**",
+                                "/room/public/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
-                ).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                )
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(AbstractHttpConfigurer::disable);
+
         return http.build();
     }
 

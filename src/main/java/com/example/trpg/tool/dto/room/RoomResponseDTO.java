@@ -35,4 +35,13 @@ public class RoomResponseDTO {
                 .accountLevel(room.getAccountLevel().getCode())
                 .build();
     }
+
+    public static RoomResponseDTO from(Room room) {
+        return RoomResponseDTO.builder()
+                .rno(room.getRno())
+                .title(room.getTitle())
+                .description(room.getDescription())
+                .thumbnailUrl(room.getThumbnailUrl())
+                .build();
+    }
 }

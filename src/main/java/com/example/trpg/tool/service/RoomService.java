@@ -10,16 +10,10 @@ import java.util.List;
 
 public interface RoomService {
     RoomResponseDTO createRoom(RoomRegisterRequestDTO dto, Long ownerMid);
-
     Page<RoomResponseDTO> getRoomPage(int page, int size);
-
     RoomResponseDTO getRoomDetail(Long rno);
-
     void addPlayerToRoom(Long rno, AddPlayerRequestDTO dto);
-
-    void deleteRoom(Long rno, Long ownerMid);
-
+    void deleteRoom(Long rno, Long requesterMid, String requesterRole);
     public List<RoomResponseDTO> getAllRooms();
-
     Room getRoomEntity(Long rno);
 }
